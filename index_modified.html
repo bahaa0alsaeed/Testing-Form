@@ -2,60 +2,128 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المكتب التقني</title>
     <style>
         body { 
-            /* إضافة صورة الخلفية مع تعتيم غامق لضمان وضوح النص */
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
-                        url('nm.png'); /* استبدل background.jpg برابط صورتك */
+            /* قراءة صورة الخلفية الأصلية الخاصة بك المرفوعة في المستودع */
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('nm.png') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             color: white; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
             margin: 0; 
-            font-family: sans-serif; 
+            font-family: system-ui, -apple-system, sans-serif; 
         }
         
-        .box { background: rgba(15, 23, 42, 0.9); padding: 30px; border-radius: 20px; width: 90%; max-width: 800px; text-align: center; border: 1px solid #38bdf8; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: white; box-sizing: border-box; }
-        
-        /* الأنيميشن للأزرار والمستويات */
-        .btn, .level-item { 
-            transition: all 0.3s ease; 
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        .btn:hover, .level-item:hover { 
-            transform: scale(1.05); 
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        .box { 
+            background: rgba(30, 41, 59, 0.7); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px 30px; 
+            border-radius: 24px; 
+            width: 90%; 
+            max-width: 600px; 
+            text-align: center; 
+            border: 1px solid rgba(56, 189, 248, 0.3); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
         }
 
-        .btn { width: 100%; padding: 14px; margin-top: 10px; border-radius: 8px; border: none; background: #38bdf8; color: white; font-weight: bold; }
-        .detail-img { width: 100%; max-width: 600px; border-radius: 12px; margin: 10px auto; border: 3px solid #38bdf8; display: block; }
-        .hidden { display: none; }
+        h2 {
+            margin-top: 0;
+            color: #38bdf8;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            margin: 12px 0; 
+            border-radius: 10px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(15, 23, 42, 0.6); 
+            color: white; 
+            box-sizing: border-box; 
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
         
-        .levels-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
-        .level-item { padding: 15px; border-radius: 10px; font-weight: bold; }
-        .level-item:nth-child(1) { background: #1a4d46; border-color: #2d8a7d; }
-        .level-item:nth-child(2) { background: #6b2121; border-color: #b91c1c; }
-        .level-item:nth-child(3) { background: #71641a; border-color: #ca8a04; }
-        .level-item:nth-child(4) { background: #4a2d5f; border-color: #7e22ce; }
+        .btn, .level-item { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer;
+        }
+
+        .btn:hover, .level-item:hover { 
+            transform: translateY(-2px); 
+            filter: brightness(1.1);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn { 
+            width: 100%; 
+            padding: 14px; 
+            margin-top: 15px; 
+            border-radius: 10px; 
+            border: none; 
+            background: #38bdf8; 
+            color: #0f172a; 
+            font-weight: bold; 
+            font-size: 1.1rem;
+        }
         
-        #material-input-box { margin-top: 20px; display: none; }
+        .detail-img { 
+            width: 100%; 
+            max-width: 400px; 
+            border-radius: 16px; 
+            margin: 20px auto; 
+            border: 2px solid rgba(56, 189, 248, 0.5); 
+            display: block; 
+        }
+
+        .hidden { display: none !important; }
         
-        /* رسالة النجاح */
-        .success-message { color: #22c55e; font-size: 1.2rem; font-weight: bold; margin-top: 20px; }
+        .levels-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            margin: 25px 0; 
+        }
+
+        @media(min-width: 480px) {
+            .levels-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .level-item { 
+            padding: 18px 10px; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            font-size: 0.95rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .level-item:nth-child(1) { background: #1a4d46; }
+        .level-item:nth-child(2) { background: #6b2121; }
+        .level-item:nth-child(3) { background: #71641a; opacity: 0.6; }
+        .level-item:nth-child(4) { background: #4a2d5f; opacity: 0.6; }
+        
+        #material-input-box { margin-top: 25px; display: none; }
+        .success-message { color: #34d399; font-size: 1.4rem; font-weight: bold; margin-top: 25px; }
     </style>
 </head>
 <body>
 
     <div id="form-section" class="box">
-        <!-- استبدل الرابط أدناه برابط ويب أب الخاص بـ Google Apps Script الخاص بك -->
         <form id="contactForm" action="https://script.google.com/macros/s/AKfycbzeMGsFKMQDa7ePki8IpJDIL8TuCejzSReqnFNDOfpuqZnyubcd5FNlTASOR-1BVOmtUQ/exec" method="POST">
             <h2>نموذج التسجيل</h2>
             <input type="text" name="الاسم" placeholder="الاسم الثلاثي" required>
@@ -70,7 +138,8 @@
     </div>
 
     <div id="options-section" class="box hidden">
-        <h2>اختر التخصص:</h2>
+        <h2>اختر التخصص البرمجي:</h2>
+        <!-- استدعاء صورك الأصلية المرفوعة محلياً -->
         <button class="btn" onclick="showDetail('الجانب الإلكتروني', '111.png')">الجانب الإلكتروني</button>
         <button class="btn" onclick="showDetail('الجانب الميكانيكي', '3333.png')">الجانب الميكانيكي</button>
         <button class="btn" onclick="showDetail('الجانب البرمجي', '2222.png')">الجانب البرمجي</button>
@@ -82,9 +151,9 @@
         <div class="levels-grid" id="levels-container"></div>
         <div id="material-input-box">
             <input type="text" id="user-material" placeholder="اكتب اسم المادة المراد دراستها...">
-            <button class="btn" id="submit-btn" style="background:#22c55e" onclick="finish()">إرسال التسجيل</button>
+            <button class="btn" id="submit-btn" style="background:#10b981; color: white;" onclick="finish()">إرسال التسجيل</button>
         </div>
-        <button class="btn" id="back-btn" style="background:#475569" onclick="location.reload()">العودة</button>
+        <button class="btn" id="back-btn" style="background:#475569; color: white;" onclick="location.reload()">العودة</button>
         <div id="status-message" class="success-message hidden"></div>
     </div>
 
@@ -92,7 +161,7 @@
         document.getElementById('contactForm').onsubmit = function(e) {
             e.preventDefault();
             document.getElementById('form-section').style.display = 'none';
-            document.getElementById('options-section').style.display = 'block';
+            document.getElementById('options-section').classList.remove('hidden');
         };
 
         function showDetail(title, imgSrc) {
@@ -118,42 +187,45 @@
                 };
                 container.appendChild(div);
             });
-            document.getElementById('options-section').style.display = 'none';
-            document.getElementById('detail-section').style.display = 'block';
+            document.getElementById('options-section').classList.add('hidden');
+            document.getElementById('detail-section').classList.remove('hidden');
         }
 
         function finish() {
             const mat = document.getElementById('user-material').value;
-            if(!mat) { alert(" يرجى كتابة اسم المادة المراد دراستها"); return; }
+            if(!mat) { alert("يرجى كتابة اسم المادة المراد دراستها"); return; }
             document.getElementById('hidden-material').value = mat;
             
-            // تحويل الزر لحالة الإرسال لمنع التكرار
             const submitBtn = document.getElementById('submit-btn');
-            submitBtn.innerText = "جاري الإرسال...";
+            submitBtn.innerText = "جاري الإرسال وحفظ البيانات...";
             submitBtn.disabled = true;
 
             const form = document.getElementById('contactForm');
-            const formData = new FormData(form);
+            const urlEncodedData = new URLSearchParams(new FormData(form)).toString();
 
-            // إرسال البيانات إلى Google Sheets عبر Fetch API بدون مغادرة الصفحة
             fetch(form.action, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: urlEncodedData,
+                mode: 'no-cors'
             })
-            .then(response => {
+            .then(() => {
                 document.getElementById('material-input-box').style.display = 'none';
                 document.getElementById('levels-container').style.display = 'none';
                 document.getElementById('back-btn').style.display = 'none';
+                document.getElementById('detail-image').style.display = 'none';
                 
                 const statusMsg = document.getElementById('status-message');
                 statusMsg.innerText = "🎉 تم إرسال تسجيلك بنجاح وحفظه في Google Sheets!";
                 statusMsg.classList.remove('hidden');
             })
             .catch(error => {
-                alert("حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.");
+                alert("حدث خطأ أثناء الإرسال، يرجى إعادة المحاولة.");
                 submitBtn.innerText = "إرسال التسجيل";
                 submitBtn.disabled = false;
-                console.error('Error!', error.message);
+                console.error('Error!', error);
             });
         }
     </script>
